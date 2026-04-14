@@ -153,7 +153,8 @@ export function flattenResponse(
     (k) => modelProperties[k].serializedName === "",
   );
   if (expectedBodyTypeName === "Sequence" || isPageableResponse) {
-    const arrayResponse: Record<string, unknown> = fullResponse.parsedBody ?? {};
+    const arrayResponse: { [key: string]: unknown } =
+      fullResponse.parsedBody ?? ([] as unknown as { [key: string]: unknown });
 
     for (const key of Object.keys(modelProperties)) {
       if (modelProperties[key].serializedName) {

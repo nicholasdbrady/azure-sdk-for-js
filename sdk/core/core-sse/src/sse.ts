@@ -2,11 +2,7 @@
 // Licensed under the MIT License.
 
 import type { IncomingMessage } from "#platform/types";
-import type {
-  EventMessage,
-  EventMessageStream,
-  NodeJSReadableStream,
-} from "./models.js";
+import type { EventMessage, EventMessageStream, NodeJSReadableStream } from "./models.js";
 import { createStream, ensureAsyncIterable } from "./utils.js";
 
 type PartialSome<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;

@@ -113,7 +113,6 @@ function appendPath(url: string, pathToAppend?: string): string {
 
   const parsedUrl = new URL(url);
   let newPath = parsedUrl.pathname;
-  let newSearch = parsedUrl.search;
 
   if (!newPath.endsWith("/")) {
     newPath = `${newPath}/`;
@@ -129,13 +128,16 @@ function appendPath(url: string, pathToAppend?: string): string {
     const search = pathToAppend.substring(searchStart + 1);
     newPath = newPath + path;
     if (search) {
-      newSearch = newSearch ? `${newSearch}&${search}` : `?${search}`;
+      parsedUrl.search = parsedUrl.search ? `${parsedUrl.search}&${search}` : search;
     }
   } else {
     newPath = newPath + pathToAppend;
   }
 
-  return `${parsedUrl.origin}${newPath}${newSearch}${parsedUrl.hash}`;
+  // Use Object.assign to bypass react-native's incorrect readonly URL.pathname declaration
+  Object.assign(parsedUrl, { pathname: newPath });
+
+  return parsedUrl.toString();
 }
 
 function calculateQueryParameters(

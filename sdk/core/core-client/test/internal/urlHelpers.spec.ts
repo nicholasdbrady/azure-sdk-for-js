@@ -144,6 +144,51 @@ describe("getRequestUrl", function () {
     assert.strictEqual(result, "https://test.com/path?abc%3Ddef");
   });
 
+  it("should correctly set pathname via Object.assign for react-native compatibility", function () {
+    const result = getRequestUrl(
+      "https://test.com",
+      {
+        path: "/new/path",
+        httpMethod: "GET",
+        responses: {},
+        serializer,
+      },
+      {},
+      {},
+    );
+    assert.strictEqual(result, "https://test.com/new/path");
+  });
+
+  it("should preserve credentials when appending path", function () {
+    const result = getRequestUrl(
+      "https://user:pass@test.com",
+      {
+        path: "/api/resource",
+        httpMethod: "GET",
+        responses: {},
+        serializer,
+      },
+      {},
+      {},
+    );
+    assert.strictEqual(result, "https://user:pass@test.com/api/resource");
+  });
+
+  it("should encode special characters in appended path", function () {
+    const result = getRequestUrl(
+      "https://test.com",
+      {
+        path: "/path with spaces/résource",
+        httpMethod: "GET",
+        responses: {},
+        serializer,
+      },
+      {},
+      {},
+    );
+    assert.strictEqual(result, "https://test.com/path%20with%20spaces/r%C3%A9source");
+  });
+
   it("should create url when there is no existing value", function () {
     const url: string =
       "https://management.azure.com/subscriptions/subscription-id/resourceGroups/rg2/providers/Microsoft.Network/virtualNetworks/samplename";

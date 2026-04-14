@@ -26,8 +26,6 @@ export interface EventMessage {
 // @public
 export type EventMessageStream = ReadableStream<EventMessage> & AsyncDisposable & AsyncIterable<EventMessage>;
 
-export { IncomingMessage }
-
 // @public
 export interface NodeJSReadableStream extends NodeJS.ReadableStream {
     destroy(error?: Error): void;

@@ -7,6 +7,7 @@ import { serializeHeaders, serializeRequestBody } from "../../src/serializationP
 import { Mappers } from "../testMappers1.js";
 import { createPipelineRequest } from "@azure/core-rest-pipeline";
 import { stringifyXML } from "@azure/core-xml";
+import { stringToUint8Array } from "@azure/core-util";
 
 describe("serializationPolicy", function () {
   describe("serializeRequestBody()", () => {
@@ -839,5 +840,5 @@ describe("serializationPolicy", function () {
 });
 
 function stringToByteArray(str: string): Uint8Array {
-  return new TextEncoder().encode(str);
+  return stringToUint8Array(str, "utf-8");
 }

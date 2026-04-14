@@ -10,7 +10,7 @@ export default [
     },
   ]),
   {
-    files: ["src/**/*.ts", "src/**/*.mts", "test/**/*.ts"],
+    files: ["src/**/*.ts", "src/**/*.mts", "test/**/*.ts", "test/**/*.mts"],
     languageOptions: {
       parserOptions: {
         projectService: false,

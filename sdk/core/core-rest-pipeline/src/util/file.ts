@@ -1,10 +1,10 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { NodeReadableStream, WebReadableStream } from "@typespec/ts-http-runtime";
+import type { NodeReadableStream, WebReadableStream } from "#platform/types";
 
 function isNodeReadableStream(x: unknown): x is NodeReadableStream {
-  return Boolean(x && typeof (x as Record<string, unknown>)["pipe"] === "function");
+  return typeof x === "object" && x !== null && "pipe" in x && typeof x.pipe === "function";
 }
 
 /**
@@ -178,13 +178,17 @@ export function createFileFromStream(
 
 export { createFile } from "#platform/createFile";
 
+function hasArrayBuffer(source: Uint8Array): source is Uint8Array<ArrayBuffer> {
+  return "resize" in source.buffer;
+}
+
 function toArrayBuffer(source: Uint8Array): Uint8Array<ArrayBuffer> {
-  if ("resize" in source.buffer) {
+  if (hasArrayBuffer(source)) {
     // ArrayBuffer — return a copy if the view is a subarray of a larger buffer
     if (source.byteOffset !== 0 || source.byteLength !== source.buffer.byteLength) {
       return new Uint8Array(source) as Uint8Array<ArrayBuffer>;
     }
-    return source as Uint8Array<ArrayBuffer>;
+    return source;
   }
   // SharedArrayBuffer
   return source.map((x) => x);
