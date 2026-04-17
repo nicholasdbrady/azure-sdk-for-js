@@ -1265,7 +1265,8 @@ describe("ServiceClient", function () {
       },
     });
     const response = await client.sendOperationRequest<{ body: Date }>({}, operationSpec);
-    assert.isDefined(response.body);
+    assert.instanceOf(response.body, Date);
+    assert.isNaN(response.body.getTime());
   });
 
   it("should catch the mandatory parameter missing error", async function () {
@@ -1625,11 +1626,11 @@ describe("ServiceClient requestOptions", () => {
     );
 
     assert.ok(capturedRequest);
-    assert.strictEqual(capturedRequest?.timeout, 5000);
-    assert.strictEqual(capturedRequest?.onUploadProgress, onUploadProgress);
-    assert.strictEqual(capturedRequest?.onDownloadProgress, onDownloadProgress);
-    assert.strictEqual(capturedRequest?.abortSignal, abortController.signal);
-    assert.ok(capturedRequest?.tracingOptions);
+    assert.strictEqual(capturedRequest!.timeout, 5000);
+    assert.strictEqual(capturedRequest!.onUploadProgress, onUploadProgress);
+    assert.strictEqual(capturedRequest!.onDownloadProgress, onDownloadProgress);
+    assert.strictEqual(capturedRequest!.abortSignal, abortController.signal);
+    assert.ok(capturedRequest!.tracingOptions);
   });
 });
 
