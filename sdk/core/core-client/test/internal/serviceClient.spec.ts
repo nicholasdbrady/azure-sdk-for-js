@@ -1625,11 +1625,11 @@ describe("ServiceClient requestOptions", () => {
     );
 
     assert.ok(capturedRequest);
-    assert.strictEqual(capturedRequest!.timeout, 5000);
-    assert.strictEqual(capturedRequest!.onUploadProgress, onUploadProgress);
-    assert.strictEqual(capturedRequest!.onDownloadProgress, onDownloadProgress);
-    assert.strictEqual(capturedRequest!.abortSignal, abortController.signal);
-    assert.ok(capturedRequest!.tracingOptions);
+    assert.strictEqual(capturedRequest?.timeout, 5000);
+    assert.strictEqual(capturedRequest?.onUploadProgress, onUploadProgress);
+    assert.strictEqual(capturedRequest?.onDownloadProgress, onDownloadProgress);
+    assert.strictEqual(capturedRequest?.abortSignal, abortController.signal);
+    assert.ok(capturedRequest?.tracingOptions);
   });
 });
 

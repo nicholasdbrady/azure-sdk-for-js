@@ -891,7 +891,7 @@ describe("serializationPolicy", () => {
     );
 
     assert.ok(capturedRequest);
-    assert.deepStrictEqual(capturedRequest!.formData, { file: "fileContent" });
+    assert.deepStrictEqual(capturedRequest?.formData, { file: "fileContent" });
   });
 
   it("should handle text/plain content type without JSON stringifying", async () => {
@@ -932,7 +932,7 @@ describe("serializationPolicy", () => {
     );
 
     assert.ok(capturedRequest);
-    assert.strictEqual(capturedRequest!.body, "plain text content");
+    assert.strictEqual(capturedRequest?.body, "plain text content");
   });
 });
 
@@ -1017,7 +1017,7 @@ describe("serializationPolicy - XML serialization", () => {
     );
 
     assert.ok(capturedRequest);
-    assert.isString(capturedRequest!.body);
+    assert.isString(capturedRequest?.body);
   });
 
   it("should serialize XML Sequence with xmlNamespace", async () => {
@@ -1170,7 +1170,7 @@ describe("serializationPolicy - XML serialization", () => {
     );
 
     assert.ok(capturedRequest);
-    assert.strictEqual(capturedRequest!.body, "null");
+    assert.strictEqual(capturedRequest?.body, "null");
   });
 
   it("should serialize Stream body without JSON.stringify in non-XML", async () => {
@@ -1206,7 +1206,7 @@ describe("serializationPolicy - XML serialization", () => {
     );
 
     assert.ok(capturedRequest);
-    assert.strictEqual(capturedRequest!.body, streamBody);
+    assert.strictEqual(capturedRequest?.body, streamBody);
   });
 });
 
@@ -1358,7 +1358,7 @@ describe("serializationPolicy - XML Stream body should not be stringified", () =
 
     assert.ok(capturedRequest);
     // Stream should not be stringified
-    assert.strictEqual(capturedRequest!.body, streamBody);
+    assert.strictEqual(capturedRequest?.body, streamBody);
   });
 });
 
@@ -1394,6 +1394,6 @@ describe("serializationPolicy - custom headers via requestOptions", () => {
     );
 
     assert.ok(capturedRequest);
-    assert.strictEqual(capturedRequest!.headers.get("X-Custom"), "myValue");
+    assert.strictEqual(capturedRequest?.headers.get("X-Custom"), "myValue");
   });
 });
