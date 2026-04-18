@@ -20,7 +20,7 @@ export function keyCredentialAuthenticationPolicy(
 ): PipelinePolicy {
   return {
     name: keyCredentialAuthenticationPolicyName,
-    sendRequest(request: PipelineRequest, next: SendRequest): Promise<PipelineResponse> {
+    async sendRequest(request: PipelineRequest, next: SendRequest): Promise<PipelineResponse> {
       request.headers.set(apiKeyHeaderName, credential.key);
       return next(request);
     },

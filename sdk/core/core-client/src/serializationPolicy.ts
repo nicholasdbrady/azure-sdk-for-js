@@ -48,7 +48,7 @@ export function serializationPolicy(options: SerializationPolicyOptions = {}): P
 
   return {
     name: serializationPolicyName,
-    sendRequest(request: OperationRequest, next: SendRequest): Promise<PipelineResponse> {
+    async sendRequest(request: OperationRequest, next: SendRequest): Promise<PipelineResponse> {
       const operationInfo = getOperationRequestInfo(request);
       const operationSpec = operationInfo?.operationSpec;
       const operationArguments = operationInfo?.operationArguments;
