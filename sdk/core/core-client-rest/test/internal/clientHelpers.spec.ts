@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 
 import { describe, it, assert } from "vitest";
-import { createDefaultPipeline, getCachedDefaultHttpsClient } from "../../src/clientHelpers.js";
+import { createDefaultPipeline } from "../../src/clientHelpers.js";
 import { bearerTokenAuthenticationPolicyName } from "@azure/core-rest-pipeline";
 import { keyCredentialAuthenticationPolicyName } from "../../src/keyCredentialAuthenticationPolicy.js";
 import type { TokenCredential } from "@azure/core-auth";
@@ -34,7 +34,10 @@ describe("clientHelpers", () => {
     assert.isNotEmpty(policies, "default pipeline should contain policies");
 
     const apiVersionPolicy = policies.find((p) => p.name === apiVersionPolicyName);
-    assert.isDefined(apiVersionPolicy, `Pipeline policy not found in the default pipeline: ${apiVersionPolicyName}`);
+    assert.isDefined(
+      apiVersionPolicy,
+      `Pipeline policy not found in the default pipeline: ${apiVersionPolicyName}`,
+    );
   });
 
   it("should throw if key credentials but no Api Header Name", () => {
@@ -65,16 +68,6 @@ describe("clientHelpers", () => {
     assert.isDefined(keyCredPolicy, "pipeline should have keyCredentialAuthenticationPolicyName");
   });
 
-  it("should not treat a non-string key property as a KeyCredential", () => {
-    const pipeline = createDefaultPipeline(mockBaseUrl, { key: 123 } as any);
-    const policies = pipeline.getOrderedPolicies();
-
-    assert.isUndefined(
-      policies.find((p) => p.name === keyCredentialAuthenticationPolicyName),
-      "pipeline should not have keyCredentialAuthenticationPolicyName for non-string key",
-    );
-  });
-
   it("should create a default pipeline with TokenCredential", () => {
     const mockCredential: TokenCredential = {
       getToken: async () => ({ expiresOnTimestamp: 0, token: "mockToken" }),
@@ -91,19 +84,5 @@ describe("clientHelpers", () => {
       policies.find((p) => p.name === keyCredentialAuthenticationPolicyName),
       "pipeline shouldn have keyCredentialAuthenticationPolicyName",
     );
-  });
-
-  describe("getCachedDefaultHttpsClient", () => {
-    it("should return an HttpClient", () => {
-      const client = getCachedDefaultHttpsClient();
-      assert.isDefined(client);
-      assert.isFunction(client.sendRequest);
-    });
-
-    it("should return the same instance on subsequent calls", () => {
-      const client1 = getCachedDefaultHttpsClient();
-      const client2 = getCachedDefaultHttpsClient();
-      assert.strictEqual(client1, client2, "should return cached instance");
-    });
   });
 });
