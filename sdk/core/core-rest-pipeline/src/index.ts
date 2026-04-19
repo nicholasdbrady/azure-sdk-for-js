@@ -1,7 +1,11 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-export type { NodeReadableStream, NodeBuffer, WebReadableStream } from "#platform/types";
+export type {
+  NodeReadableStream,
+  NodeBuffer,
+  WebReadableStream,
+} from "@typespec/ts-http-runtime";
 export type { HttpMethods } from "@azure/core-util";
 export type {
   Agent,

@@ -112,11 +112,6 @@
   },
   "module": "./dist/esm/index.js",
   "imports": {
-    "#platform/types": {
-      "browser": "./src/types-browser.mts",
-      "react-native": "./src/types-browser.mts",
-      "default": "./src/types.ts"
-    },
     "#platform/userAgent": {
       "browser": "./src/util/userAgentPlatform-browser.mts",
       "react-native": "./src/util/userAgentPlatform-react-native.mts",

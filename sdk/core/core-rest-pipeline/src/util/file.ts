@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { NodeReadableStream, WebReadableStream } from "#platform/types";
+import type { NodeReadableStream, WebReadableStream } from "@typespec/ts-http-runtime";
 
 function isNodeReadableStream(x: unknown): x is NodeReadableStream {
   return typeof x === "object" && x !== null && "pipe" in x && typeof x.pipe === "function";
