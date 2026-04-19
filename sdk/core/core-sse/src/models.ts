@@ -23,4 +23,4 @@ export type EventMessageStream = ReadableStream<EventMessage> &
   AsyncDisposable &
   AsyncIterable<EventMessage>;
 
-export type { NodeJSReadableStream } from "#platform/types";
+export type { IncomingMessage, NodeJSReadableStream } from "#platform/types";
