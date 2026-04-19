@@ -11,7 +11,7 @@
   "imports": {
     "#platform/types": {
       "browser": "./src/types-browser.mts",
-      "react-native": "./src/types-rn.mts",
+      "react-native": "./src/types-react-native.mts",
       "default": "./src/types.ts"
     }
   },

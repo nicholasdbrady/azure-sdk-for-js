@@ -11,7 +11,7 @@ targets:
 
   - name: react-native
     tsconfig: "./config/tsconfig.src.react-native.json"
-    polyfillSuffix: "-rn"
+    polyfillSuffix: "-react-native"
 
   - name: esm
     condition: import
