@@ -42,9 +42,10 @@ declare global {
 }
 
 /**
- * `IncomingMessage` is not available in the browser or React Native.
+ * An alias for Node.js's `http.IncomingMessage` type. Defined as `never` on
+ * browser and React Native platforms where Node.js HTTP is not available.
  */
-export type IncomingMessage = never;
+export type NodeIncomingMessage = never;
 
 /**
  * `NodeJSReadableStream` is not available in the browser or React Native.

@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { IncomingMessage } from "#platform/types";
+import type { NodeIncomingMessage } from "#platform/types";
 import { cancelNodeStream } from "#platform/types";
 import type { NodeJSReadableStream } from "./models.js";
 
@@ -63,7 +63,7 @@ function iteratorToStream<T>(
 }
 
 export function ensureAsyncIterable(
-  stream: IncomingMessage | NodeJSReadableStream | ReadableStream<Uint8Array>,
+  stream: NodeIncomingMessage | NodeJSReadableStream | ReadableStream<Uint8Array>,
 ): {
   cancel(): Promise<void>;
   iterable: AsyncIterable<Uint8Array>;
