@@ -34,8 +34,9 @@ describe("clientHelpers", () => {
     assert.isNotEmpty(policies, "default pipeline should contain policies");
 
     const apiVersionPolicy = policies.find((p) => p.name === apiVersionPolicyName);
-    assert.isDefined(
-      apiVersionPolicy,
+    assert.equal(
+      apiVersionPolicy?.name,
+      apiVersionPolicyName,
       `Pipeline policy not found in the default pipeline: ${apiVersionPolicyName}`,
     );
   });
@@ -61,8 +62,14 @@ describe("clientHelpers", () => {
       "pipeline shouldn't have bearerTokenAuthenticationPolicyName",
     );
 
-    const keyCredPolicy = policies.find((p) => p.name === keyCredentialAuthenticationPolicyName);
-    assert.isDefined(keyCredPolicy, "pipeline should have keyCredentialAuthenticationPolicyName");
+    const keyCredPolicy = policies.find(
+      (p) => p.name === keyCredentialAuthenticationPolicyName,
+    );
+    assert.equal(
+      keyCredPolicy?.name,
+      keyCredentialAuthenticationPolicyName,
+      "pipeline should have keyCredentialAuthenticationPolicyName",
+    );
   });
 
   it("should create a default pipeline with TokenCredential", () => {
@@ -74,8 +81,14 @@ describe("clientHelpers", () => {
 
     assert.isNotEmpty(policies, "default pipeline should contain policies");
 
-    const bearerPolicy = policies.find((p) => p.name === bearerTokenAuthenticationPolicyName);
-    assert.isDefined(bearerPolicy, "pipeline should have bearerTokenAuthenticationPolicyName");
+    const bearerPolicy = policies.find(
+      (p) => p.name === bearerTokenAuthenticationPolicyName,
+    );
+    assert.equal(
+      bearerPolicy?.name,
+      bearerTokenAuthenticationPolicyName,
+      "pipeline should have bearerTokenAuthenticationPolicyName",
+    );
 
     assert.isUndefined(
       policies.find((p) => p.name === keyCredentialAuthenticationPolicyName),
