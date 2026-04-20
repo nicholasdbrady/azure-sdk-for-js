@@ -80,7 +80,8 @@ describe("HttpsPipeline", function () {
 
       const response = await pipeline.sendRequest(testHttpClient, request);
       assert.strictEqual(response.request.timeout, 1);
-      assert.strictEqual((response.request as any).priority, "low");
+      // priority is a dynamic property from requestOverrides spread
+      assert.strictEqual(response.request.requestOverrides?.["priority"], "low");
     });
   });
 });
