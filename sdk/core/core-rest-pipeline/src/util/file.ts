@@ -121,8 +121,7 @@ export function createRawFile(
     webkitRelativePath: options.webkitRelativePath ?? "",
     size: content.byteLength,
     name,
-    arrayBuffer: async () =>
-      content.buffer.slice(content.byteOffset, content.byteOffset + content.byteLength),
+    arrayBuffer: async () => toArrayBuffer(content).buffer,
     stream: () =>
       (
         new Blob([toArrayBuffer(content)] as unknown as (Blob | string)[]) as unknown as {
